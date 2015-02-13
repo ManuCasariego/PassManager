@@ -70,8 +70,8 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
 
     private void inicializarComponentes() {
         listView = (ListView) rootView.findViewById(R.id.listView);
-        from = new String[]{DataBaseManager.CN_NAME, DataBaseManager.CN_PASSWORD};
-        to = new int[]{R.id.textViewNombreUsuario, R.id.textViewContra};
+        from = new String[]{DataBaseManager.CN_SERVICE, DataBaseManager.CN_NAME, DataBaseManager.CN_PASSWORD};
+        to = new int[]{R.id.textViewServicio ,R.id.textViewNombreUsuario, R.id.textViewContra};
         cursorAdapter = new SimpleCursorAdapter(rootView.getContext(), R.layout.list_item_personalizado, cursor, from, to, 0);
         listView.setAdapter(cursorAdapter);
         listView.setOnItemClickListener(this);
@@ -87,9 +87,11 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
+                String service = data.getStringExtra(AddActivity.SERVICE);
                 String userName = data.getStringExtra(AddActivity.USERNAME);
                 String password = data.getStringExtra(AddActivity.PASSWORD);
-                db.insertar(userName, password);
+
+                db.insertar(service, userName, password);
                 actualizarListView();
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 Toast.makeText(rootView.getContext(), "Se ha cancelado", Toast.LENGTH_LONG).show();
@@ -99,8 +101,9 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String service =  ((TextView) view.findViewById(R.id.textViewServicio)).getText().toString();
         String userName = ((TextView) view.findViewById(R.id.textViewNombreUsuario)).getText().toString();
         String password = ((TextView) view.findViewById(R.id.textViewContra)).getText().toString();
-        Toast.makeText(rootView.getContext(), userName+password, Toast.LENGTH_SHORT).show();
+        Toast.makeText(rootView.getContext(), service+userName+password, Toast.LENGTH_SHORT).show();
     }
 }

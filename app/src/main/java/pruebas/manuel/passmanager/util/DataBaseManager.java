@@ -14,9 +14,11 @@ public class DataBaseManager {
     public static final String CN_ID = "_id";
     public static final String CN_NAME = "nombreusuario";
     public static final String CN_PASSWORD = "contrasenia";
+    public static final String CN_SERVICE = "servicio";
 
     public static final String CREATE_TABLE = "create table " + TABLE_NAME + "("
             + CN_ID + " integer primary key autoincrement,"
+            + CN_SERVICE + " text not null,"
             + CN_NAME + " text not null,"
             + CN_PASSWORD + " text not null);";
 
@@ -28,32 +30,33 @@ public class DataBaseManager {
         db = helper.getWritableDatabase();
     }
 
-    public void insertar(String nombre, String contra) {
-        db.insert(TABLE_NAME, null, contenedor(nombre, contra));
+    public void insertar(String servicio, String nombre, String contra) {
+        db.insert(TABLE_NAME, null, contenedor(servicio, nombre, contra));
     }
 
-    public ContentValues contenedor(String nombre, String contra) {
+    public ContentValues contenedor(String servicio, String nombre, String contra) {
         ContentValues contentValues = new ContentValues();
+        contentValues.put(CN_SERVICE, servicio);
         contentValues.put(CN_NAME, nombre);
         contentValues.put(CN_PASSWORD, contra);
         return contentValues;
     }
 
-    public void eliminar(String nombre, String contra) {
-        db.delete(TABLE_NAME, CN_NAME + "=? AND " + CN_PASSWORD + "=?", new String[]{nombre, contra});
+    public void eliminar(String servicio, String nombre, String contra) {
+        db.delete(TABLE_NAME, CN_SERVICE + "=? AND " + CN_NAME + "=? AND " + CN_PASSWORD + "=?", new String[]{servicio, nombre, contra});
     }
 
-    public void modificarNombre(String nombre, String contra, String nuevoNombre) {
+   /* public void modificarNombre(String nombre, String contra, String nuevoNombre) {
         db.update(TABLE_NAME, contenedor(nuevoNombre, contra), CN_NAME + "=? AND " + CN_PASSWORD + "=?", new String[]{nombre, contra});
     }
 
     public void modificarContrasenia(String nombre, String contra, String nuevaContra) {
         db.update(TABLE_NAME, contenedor(nombre, nuevaContra), CN_NAME + "=? AND " + CN_PASSWORD + "=?", new String[]{nombre, contra});
 
-    }
+    }*/
 
     public Cursor cargarCursorContactos() {
-        String[] columnas = new String[]{CN_ID, CN_NAME, CN_PASSWORD};
+        String[] columnas = new String[]{CN_ID, CN_SERVICE, CN_NAME, CN_PASSWORD};
         return db.query(TABLE_NAME, columnas, null, null, null, null, null);
     }
 }

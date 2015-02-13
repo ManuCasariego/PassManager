@@ -21,6 +21,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitCenter"
+            android:id="@+id/imageViewServicio"
+            android:src="@drawable/ic_action_service" />
+
+        <TextView
+            android:layout_width="15dp"
+            android:layout_height="0dp" />
+
+        <EditText
+            android:id="@+id/editTextService"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:hint="Servicio"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:nextFocusDown="@+id/editTextUserName" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
        >
 
         <ImageView
@@ -69,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:hint="Contraseña"
-            android:inputType="textPassword"
+            android:inputType="text"
             android:maxLines="1" />
 
     </LinearLayout>
