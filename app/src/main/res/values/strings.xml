@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PassManager</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="title_activity_add">AddActivity</string>
+</resources>
