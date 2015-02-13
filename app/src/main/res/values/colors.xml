@@ -3,7 +3,7 @@
     <item name="ColorPrimary" type="color">#673AB7</item>
     <item name="ColorPrimaryDark" type="color">#512DA8</item>
     <item name="ColorPrimaryLight" type="color">#D1C4E9</item>
-    <item name="ColorAccent" type="color">#FF5722</item>
+    <item name="ColorAccent" type="color">#FF9800</item>
     <item name="ColorAccentLight" type="color">#FFCCBC</item>
     <item name="PrimaryText" type="color">#212121</item>
 </resources>

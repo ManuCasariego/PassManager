@@ -34,16 +34,16 @@ public class AddActivity extends Activity {
     }
 
     private void inicializarComponentes() {
-        btnGuardar = (Button) findViewById(R.id.btnGuardar);
-        btnCancelar = (Button) findViewById(R.id.btnCancelar);
+        btnGuardar = (Button) findViewById(R.id.btnGuardarAdd);
+        btnCancelar = (Button) findViewById(R.id.btnCancelarAdd);
 
-        editTextService = (EditText) findViewById(R.id.editTextService);
-        editTextUserName = (EditText) findViewById(R.id.editTextUserName);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextService = (EditText) findViewById(R.id.editTextServiceAdd);
+        editTextUserName = (EditText) findViewById(R.id.editTextUserNameAdd);
+        editTextPassword = (EditText) findViewById(R.id.editTextPasswordAdd);
 
-        imageViewService = (ImageView) findViewById(R.id.imageViewServicio);
-        imageViewUser = (ImageView) findViewById(R.id.imageViewUsuario);
-        imageViewPassword = (ImageView) findViewById(R.id.imageViewContra);
+        imageViewService = (ImageView) findViewById(R.id.imageViewServicioAdd);
+        imageViewUser = (ImageView) findViewById(R.id.imageViewUsuarioAdd);
+        imageViewPassword = (ImageView) findViewById(R.id.imageViewContraAdd);
         returnIntent = new Intent();
 
         editTextService.setOnFocusChangeListener(new View.OnFocusChangeListener() {

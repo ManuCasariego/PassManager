@@ -1,18 +1,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:minWidth="500dp"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context="pruebas.manuel.passmanager.AddActivity">
+    tools:context="pruebas.manuel.passmanager.ViewActivity">
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
-        android:text="Añadir usuario"
+        android:text="Usuario"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
 
@@ -22,7 +23,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageViewServicioAdd"
+            android:id="@+id/imageViewServicioView"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:scaleType="fitCenter"
@@ -32,16 +33,16 @@
             android:layout_width="15dp"
             android:layout_height="0dp" />
 
-        <EditText
-            android:id="@+id/editTextServiceAdd"
+        <TextView
+            android:id="@+id/textViewServiceView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="4"
-            android:hint="Servicio"
-            android:inputType="textCapWords"
             android:maxLines="1"
-            android:nextFocusDown="@+id/editTextUserNameAdd" />
+            android:text="Servicio"
+            android:textSize="20sp" />
+
 
     </LinearLayout>
 
@@ -51,7 +52,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageViewUsuarioAdd"
+            android:id="@+id/imageViewUsuarioView"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:scaleType="fitCenter"
@@ -61,16 +62,24 @@
             android:layout_width="15dp"
             android:layout_height="0dp" />
 
-        <EditText
-            android:id="@+id/editTextUserNameAdd"
+        <TextView
+            android:id="@+id/textViewUserNameView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="4"
-            android:hint="Nombre de usuario"
-            android:inputType="textPersonName"
             android:maxLines="1"
-            android:nextFocusDown="@+id/editTextPasswordAdd" />
+            android:text="Nombre de usuario"
+            android:textSize="20sp" />
+
+        <at.markushi.ui.CircleButton
+            android:id="@+id/buttonUserNameView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_action_name"
+            app:cb_color="@color/ColorAccent"
+            app:cb_pressedRingWidth="8dip" />
+
 
     </LinearLayout>
 
@@ -80,7 +89,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageViewContraAdd"
+            android:id="@+id/imageViewContraView"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:scaleType="fitCenter"
@@ -90,38 +99,25 @@
             android:layout_width="15dp"
             android:layout_height="0dp" />
 
-        <EditText
-            android:id="@+id/editTextPasswordAdd"
+        <TextView
+            android:id="@+id/textViewPasswordView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="4"
-            android:hint="Contraseña"
-            android:inputType="text"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:text="Contraseña"
+            android:textSize="20sp" />
+
+        <at.markushi.ui.CircleButton
+
+            android:id="@+id/buttonPasswordView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_action_name"
+            app:cb_color="@color/ColorAccent"
+            app:cb_pressedRingWidth="8dip" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:orientation="horizontal"
-        android:paddingTop="15dp">
-
-        <Button
-            android:id="@+id/btnCancelarAdd"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CANCELAR" />
-
-        <Button
-            android:id="@+id/btnGuardarAdd"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="GUARDAR"
-            android:textColor="@color/ColorPrimary" />
-    </LinearLayout>
 </LinearLayout>
