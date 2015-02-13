@@ -1,17 +1,16 @@
 package pruebas.manuel.passmanager;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
-public class AddActivity extends ActionBarActivity {
+public class AddActivity extends Activity {
 
 
     public static final String USERNAME = "userName";
@@ -21,6 +20,8 @@ public class AddActivity extends ActionBarActivity {
     private Button btnCancelar;
     private EditText editTextUserName;
     private EditText editTextPassword;
+    private ImageView imageViewUser;
+    private ImageView imageViewPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,33 @@ public class AddActivity extends ActionBarActivity {
         btnCancelar = (Button) findViewById(R.id.btnCancelar);
         editTextUserName = (EditText) findViewById(R.id.editTextUserName);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        imageViewUser = (ImageView) findViewById(R.id.imageViewUsuario);
+        imageViewPassword= (ImageView) findViewById(R.id.imageViewContra);
         returnIntent = new Intent();
+
+        editTextUserName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    imageViewUser.setImageResource(R.mipmap.ic_action_user_orange);
+                }
+                else{
+                    imageViewUser.setImageResource(R.drawable.ic_action_user);
+                }
+            }
+        });
+
+        editTextPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    imageViewPassword.setImageResource(R.mipmap.ic_action_password_orange);
+                }
+                else{
+                    imageViewPassword.setImageResource(R.drawable.ic_action_password);
+                }
+            }
+        });
 
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,27 +102,4 @@ public class AddActivity extends ActionBarActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == android.R.id.home) {
-            salir();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

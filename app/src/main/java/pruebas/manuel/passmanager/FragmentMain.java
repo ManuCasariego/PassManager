@@ -70,7 +70,7 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
 
     private void inicializarComponentes() {
         listView = (ListView) rootView.findViewById(R.id.listView);
-        from = new String[]{db.CN_NAME, db.CN_PASSWORD};
+        from = new String[]{DataBaseManager.CN_NAME, DataBaseManager.CN_PASSWORD};
         to = new int[]{R.id.textViewNombreUsuario, R.id.textViewContra};
         cursorAdapter = new SimpleCursorAdapter(rootView.getContext(), R.layout.list_item_personalizado, cursor, from, to, 0);
         listView.setAdapter(cursorAdapter);
@@ -101,9 +101,6 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String userName = ((TextView) view.findViewById(R.id.textViewNombreUsuario)).getText().toString();
         String password = ((TextView) view.findViewById(R.id.textViewContra)).getText().toString();
-
         Toast.makeText(rootView.getContext(), userName+password, Toast.LENGTH_SHORT).show();
-
-
     }
 }
