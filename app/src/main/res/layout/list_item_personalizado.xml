@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="4dp"
-        android:text="Servicio"
+        android:text="@string/service"
         android:textColor="@color/PrimaryText"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -25,11 +25,4 @@
         android:textColor="@android:color/darker_gray"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/textViewContra"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/password"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="16sp" />
 </LinearLayout>

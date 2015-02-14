@@ -4,7 +4,7 @@ package pruebas.manuel.passmanager.util;
  * Created by Manuel on 14/02/2015.
  */
 public class Usuario {
-
+    private String id;
     private String userName, password, service, URL;
 
     public Usuario() {
@@ -41,9 +41,14 @@ public class Usuario {
 
 
     public void setURL(String URL) {
-        if (URL != null) {
-            this.URL = URL;
-        }
+        this.URL = URL;
+    }
 
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

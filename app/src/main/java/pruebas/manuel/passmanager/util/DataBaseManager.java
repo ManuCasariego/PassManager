@@ -45,17 +45,14 @@ public class DataBaseManager {
         return contentValues;
     }
 
-    public void eliminar(String servicio, String url, String nombre, String contra) {
-        db.delete(TABLE_NAME, CN_SERVICE + "=? AND "
-                + CN_URL + "=? AND "
-                + CN_NAME + "=? AND "
-                + CN_PASSWORD + "=?", new String[]{servicio, url, nombre, contra});
+    public void eliminar(String id) {
+        db.delete(TABLE_NAME, CN_ID + "=?", new String[]{id});
     }
 
-   /* public void modificarNombre(String nombre, String contra, String nuevoNombre) {
-        db.update(TABLE_NAME, contenedor(nuevoNombre, contra), CN_NAME + "=? AND " + CN_PASSWORD + "=?", new String[]{nombre, contra});
+    public void modificar(String servicio, String url, String nombre, String contra, String id) {
+        db.update(TABLE_NAME, contenedor(servicio, url, nombre, contra), CN_ID + "=?", new String[]{id});
     }
-
+/*
     public void modificarContrasenia(String nombre, String contra, String nuevaContra) {
         db.update(TABLE_NAME, contenedor(nombre, nuevaContra), CN_NAME + "=? AND " + CN_PASSWORD + "=?", new String[]{nombre, contra});
 

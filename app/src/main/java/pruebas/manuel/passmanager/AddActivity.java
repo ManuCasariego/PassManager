@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import at.markushi.ui.CircleButton;
+
 
 public class AddActivity extends Activity {
 
@@ -16,6 +18,7 @@ public class AddActivity extends Activity {
     public static final String URL = "url";
     public static final String USERNAME = "userName";
     public static final String PASSWORD = "password";
+    public static final int RESULT_DELETE = 234;
 
     private Intent returnIntent;
     private Button btnGuardar;
@@ -31,6 +34,8 @@ public class AddActivity extends Activity {
     private ImageView imageViewUser;
     private ImageView imageViewPassword;
 
+    private CircleButton buttonDelete;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +44,15 @@ public class AddActivity extends Activity {
     }
 
     private void inicializarComponentes() {
+
+        Intent intent = getIntent();
+
+        String service = intent.getStringExtra(AddActivity.SERVICE);
+        String url = intent.getStringExtra(AddActivity.URL);
+        String userName = intent.getStringExtra(AddActivity.USERNAME);
+        String password = intent.getStringExtra(AddActivity.PASSWORD);
+
+
         btnGuardar = (Button) findViewById(R.id.btnGuardarAdd);
         btnCancelar = (Button) findViewById(R.id.btnCancelarAdd);
 
@@ -47,12 +61,30 @@ public class AddActivity extends Activity {
         editTextUserName = (EditText) findViewById(R.id.editTextUserNameAdd);
         editTextPassword = (EditText) findViewById(R.id.editTextPasswordAdd);
 
+        editTextService.setText(service);
+        editTextUrl.setText(url);
+        editTextUserName.setText(userName);
+        editTextPassword.setText(password);
+
         imageViewService = (ImageView) findViewById(R.id.imageViewServicioAdd);
         imageViewUrl = (ImageView) findViewById(R.id.imageViewUrlAdd);
         imageViewUser = (ImageView) findViewById(R.id.imageViewUsuarioAdd);
         imageViewPassword = (ImageView) findViewById(R.id.imageViewContraAdd);
 
         returnIntent = new Intent();
+
+        buttonDelete = (CircleButton) findViewById(R.id.buttonDeleteAdd);
+        if (service == null) {
+            buttonDelete.setVisibility(View.INVISIBLE);
+        } else {
+            buttonDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setResult(RESULT_DELETE, returnIntent);
+                    finish();
+                }
+            });
+        }
 
         editTextService.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -61,6 +93,17 @@ public class AddActivity extends Activity {
                     imageViewService.setImageResource(R.mipmap.ic_action_service_orange);
                 } else {
                     imageViewService.setImageResource(R.drawable.ic_action_service);
+                }
+            }
+        });
+
+        editTextUrl.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    imageViewUrl.setImageResource(R.mipmap.ic_actino_url_orange);
+                } else {
+                    imageViewUrl.setImageResource(R.drawable.ic_action_url);
                 }
             }
         });
@@ -113,7 +156,7 @@ public class AddActivity extends Activity {
                     Toast.makeText(AddActivity.this, "La constraseña no puede ser nula", Toast.LENGTH_SHORT).show();
                     editTextPassword.requestFocus();
                 } else {
-
+                    url = formalizarURL(url);
                     returnIntent.putExtra(SERVICE, service);
                     returnIntent.putExtra(URL, url);
                     returnIntent.putExtra(USERNAME, userName);
@@ -125,6 +168,18 @@ public class AddActivity extends Activity {
             }
         });
 
+    }
+
+    private String formalizarURL(String url) {
+        String respuesta = url.toLowerCase();
+        if (respuesta != null) {
+            if (!respuesta.equals("") && !respuesta.startsWith("http://") && !respuesta.startsWith("https://")) {
+                respuesta = "http://" + respuesta;
+            }
+        } else {
+            respuesta = "";
+        }
+        return respuesta;
     }
 
     private void salir() {

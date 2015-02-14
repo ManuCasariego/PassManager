@@ -3,6 +3,7 @@ package pruebas.manuel.passmanager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -17,13 +18,16 @@ public class ViewActivity extends Activity {
     private TextView textViewUserName;
     private TextView textViewPassword;
 
+    private CircleButton btnEdit;
     private CircleButton btnURL;
     private CircleButton btnUserName;
     private CircleButton btnPassword;
 
+    private String service;
+    private String url;
     private String userName;
     private String password;
-    private String service;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +38,23 @@ public class ViewActivity extends Activity {
     }
 
     private void listeners() {
+
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
+
+
         btnURL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
             }
         });
 
@@ -48,7 +65,6 @@ public class ViewActivity extends Activity {
                 android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", userName);
                 clipboard.setPrimaryClip(clip);
                 Toast.makeText(ViewActivity.this, "Usuario copiado al portapapeles", Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -67,6 +83,7 @@ public class ViewActivity extends Activity {
         Intent intent = getIntent();
 
         service = intent.getStringExtra(AddActivity.SERVICE);
+        url = intent.getStringExtra(AddActivity.URL);
         userName = intent.getStringExtra(AddActivity.USERNAME);
         password = intent.getStringExtra(AddActivity.PASSWORD);
 
@@ -78,8 +95,13 @@ public class ViewActivity extends Activity {
         textViewUserName.setText(userName);
         textViewPassword.setText(password);
 
+        btnEdit = (CircleButton) findViewById(R.id.buttonEditView);
         btnURL = (CircleButton) findViewById(R.id.buttonURLView);
         btnUserName = (CircleButton) findViewById(R.id.buttonUserNameView);
         btnPassword = (CircleButton) findViewById(R.id.buttonPasswordView);
+
+        if(url.equals("")){
+            btnURL.setVisibility(View.INVISIBLE);
+        }
     }
 }
