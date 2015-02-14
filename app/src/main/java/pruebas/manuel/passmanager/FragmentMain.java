@@ -16,7 +16,10 @@ import android.widget.TextView;
 
 import com.melnykov.fab.FloatingActionButton;
 
+import java.util.ArrayList;
+
 import pruebas.manuel.passmanager.util.DataBaseManager;
+import pruebas.manuel.passmanager.util.Usuario;
 
 /**
  * Created by Manuel on 12/02/2015.
@@ -33,6 +36,9 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
     private FloatingActionButton fab;
     private String[] from;
     private int[] to;
+
+    private ArrayList<Usuario> usuarios = new ArrayList<>();
+    private Usuario usuarioActual;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +65,20 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
     private void inicializarBaseDeDatos() {
         db = new DataBaseManager(rootView.getContext());
         cursor = db.cargarCursorContactos();
+        actualizarArrayList();
+    }
+
+    private void actualizarArrayList() {
+        if(cursor.moveToFirst()){
+            do{
+                usuarioActual = new Usuario();
+                usuarioActual.setService(cursor.getString(1));
+                usuarioActual.setURL(cursor.getString(2));
+                usuarioActual.setUserName(cursor.getString(3));
+                usuarioActual.setPassword(cursor.getString(4));
+                usuarios.add(usuarioActual);
+            } while(cursor.moveToNext());
+        }
     }
 
     private void inicializarComponentes() {
@@ -68,6 +88,7 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
         cursorAdapter = new SimpleCursorAdapter(rootView.getContext(), R.layout.list_item_personalizado, cursor, from, to, 0);
         listView.setAdapter(cursorAdapter);
         listView.setOnItemClickListener(this);
+
     }
 
     private void actualizarListView() {
@@ -81,10 +102,11 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
         if (requestCode == REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 String service = data.getStringExtra(AddActivity.SERVICE);
+                String url = "pruebaURL";
                 String userName = data.getStringExtra(AddActivity.USERNAME);
                 String password = data.getStringExtra(AddActivity.PASSWORD);
 
-                db.insertar(service, userName, password);
+                db.insertar(service, url, userName, password);
                 actualizarListView();
             } else if (resultCode == Activity.RESULT_CANCELED) {}
         }

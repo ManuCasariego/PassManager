@@ -41,9 +41,39 @@
             android:hint="Servicio"
             android:inputType="textCapWords"
             android:maxLines="1"
+            android:nextFocusDown="@+id/editTextUrlAdd" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageViewUrlAdd"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_action_url" />
+
+        <TextView
+            android:layout_width="15dp"
+            android:layout_height="0dp" />
+
+        <EditText
+            android:id="@+id/editTextUrlAdd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="4"
+            android:hint="URL (opcional)"
+            android:inputType="textCapWords"
+            android:maxLines="1"
             android:nextFocusDown="@+id/editTextUserNameAdd" />
 
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"

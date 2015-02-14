@@ -43,6 +43,14 @@
             android:text="Servicio"
             android:textSize="20sp" />
 
+        <at.markushi.ui.CircleButton
+            android:id="@+id/buttonURLView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_action_url"
+            app:cb_color="@color/ColorPrimary"
+            app:cb_pressedRingWidth="8dip" />
+
 
     </LinearLayout>
 

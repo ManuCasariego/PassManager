@@ -17,6 +17,7 @@ public class ViewActivity extends Activity {
     private TextView textViewUserName;
     private TextView textViewPassword;
 
+    private CircleButton btnURL;
     private CircleButton btnUserName;
     private CircleButton btnPassword;
 
@@ -33,6 +34,13 @@ public class ViewActivity extends Activity {
     }
 
     private void listeners() {
+        btnURL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         btnUserName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +78,7 @@ public class ViewActivity extends Activity {
         textViewUserName.setText(userName);
         textViewPassword.setText(password);
 
+        btnURL = (CircleButton) findViewById(R.id.buttonURLView);
         btnUserName = (CircleButton) findViewById(R.id.buttonUserNameView);
         btnPassword = (CircleButton) findViewById(R.id.buttonPasswordView);
     }

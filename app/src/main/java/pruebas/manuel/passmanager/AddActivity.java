@@ -13,16 +13,21 @@ import android.widget.Toast;
 public class AddActivity extends Activity {
 
     public static final String SERVICE = "service";
+    public static final String URL = "url";
     public static final String USERNAME = "userName";
     public static final String PASSWORD = "password";
 
     private Intent returnIntent;
     private Button btnGuardar;
     private Button btnCancelar;
+
     private EditText editTextService;
+    private EditText editTextUrl;
     private EditText editTextUserName;
     private EditText editTextPassword;
+
     private ImageView imageViewService;
+    private ImageView imageViewUrl;
     private ImageView imageViewUser;
     private ImageView imageViewPassword;
 
@@ -38,12 +43,15 @@ public class AddActivity extends Activity {
         btnCancelar = (Button) findViewById(R.id.btnCancelarAdd);
 
         editTextService = (EditText) findViewById(R.id.editTextServiceAdd);
+        editTextUrl = (EditText) findViewById(R.id.editTextUrlAdd);
         editTextUserName = (EditText) findViewById(R.id.editTextUserNameAdd);
         editTextPassword = (EditText) findViewById(R.id.editTextPasswordAdd);
 
         imageViewService = (ImageView) findViewById(R.id.imageViewServicioAdd);
+        imageViewUrl = (ImageView) findViewById(R.id.imageViewUrlAdd);
         imageViewUser = (ImageView) findViewById(R.id.imageViewUsuarioAdd);
         imageViewPassword = (ImageView) findViewById(R.id.imageViewContraAdd);
+
         returnIntent = new Intent();
 
         editTextService.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -89,10 +97,11 @@ public class AddActivity extends Activity {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String service = editTextService.getText().toString();
+                String url = editTextUrl.getText().toString();
                 String userName = editTextUserName.getText().toString();
                 String password = editTextPassword.getText().toString();
-
 
                 if (service.equals("")) {
                     Toast.makeText(AddActivity.this, "El servicio no puede ser nulo", Toast.LENGTH_SHORT).show();
@@ -104,9 +113,12 @@ public class AddActivity extends Activity {
                     Toast.makeText(AddActivity.this, "La constraseña no puede ser nula", Toast.LENGTH_SHORT).show();
                     editTextPassword.requestFocus();
                 } else {
+
                     returnIntent.putExtra(SERVICE, service);
+                    returnIntent.putExtra(URL, url);
                     returnIntent.putExtra(USERNAME, userName);
                     returnIntent.putExtra(PASSWORD, password);
+
                     setResult(RESULT_OK, returnIntent);
                     finish();
                 }
