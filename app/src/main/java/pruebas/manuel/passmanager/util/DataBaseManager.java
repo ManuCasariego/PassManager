@@ -52,14 +52,9 @@ public class DataBaseManager {
     public void modificar(String servicio, String url, String nombre, String contra, String id) {
         db.update(TABLE_NAME, contenedor(servicio, url, nombre, contra), CN_ID + "=?", new String[]{id});
     }
-/*
-    public void modificarContrasenia(String nombre, String contra, String nuevaContra) {
-        db.update(TABLE_NAME, contenedor(nombre, nuevaContra), CN_NAME + "=? AND " + CN_PASSWORD + "=?", new String[]{nombre, contra});
-
-    }*/
 
     public Cursor cargarCursorContactos() {
         String[] columnas = new String[]{CN_ID, CN_SERVICE, CN_URL, CN_NAME, CN_PASSWORD};
-        return db.query(TABLE_NAME, columnas, null, null, null, null, null);
+        return db.query(TABLE_NAME, columnas, null, null, null, null, CN_SERVICE + "," + CN_NAME + " ASC");
     }
 }

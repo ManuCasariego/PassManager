@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,8 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
     private ArrayList<Usuario> usuarios = new ArrayList<>();
     private Usuario usuarioActual;
 
+    private long mLastClickTime = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,6 +60,12 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // mis-clicking prevention, using threshold of 1000 ms
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
                 Intent i = new Intent(rootView.getContext(), AddActivity.class);
                 startActivityForResult(i, REQUEST_CODE_ADD);
             }
