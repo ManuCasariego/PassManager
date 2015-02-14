@@ -8,11 +8,10 @@
     tools:ignore="MergeRootFrame">
 
     <fragment
-        android:id="@+id/container2"
+        android:id="@+id/container1"
         android:name="pruebas.manuel.passmanager.FragmentMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 
 
 </LinearLayout>

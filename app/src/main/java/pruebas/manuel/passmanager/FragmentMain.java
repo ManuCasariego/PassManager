@@ -97,9 +97,11 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
         String password = ((TextView) view.findViewById(R.id.textViewContra)).getText().toString();
 
         Intent intent = new Intent(rootView.getContext(), ViewActivity.class);
+
         intent.putExtra(AddActivity.SERVICE, service);
         intent.putExtra(AddActivity.USERNAME, userName);
         intent.putExtra(AddActivity.PASSWORD, password);
+
         startActivity(intent);
     }
 }

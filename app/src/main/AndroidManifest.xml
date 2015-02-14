@@ -24,7 +24,7 @@
         <activity
             android:name=".ViewActivity"
             android:label="@string/title_activity_view"
-            android:theme="@style/DialogTheme">
+            android:theme="@style/DialogTheme" >
         </activity>
     </application>
 

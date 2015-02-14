@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
 
     android:orientation="vertical"
-    tools:context=".FragmentMain">
+    tools:context=".FragmentListView">
 
     <ListView
         android:id="@+id/listView"
@@ -22,6 +22,6 @@
         fab:fab_colorNormal="@color/ColorAccent"
         fab:fab_colorPressed="@color/ColorAccentLight"
         fab:fab_colorRipple="@color/ColorAccent"
-   />
+        />
 
 </FrameLayout>
