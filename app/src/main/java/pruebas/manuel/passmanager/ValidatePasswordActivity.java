@@ -47,6 +47,7 @@ public class ValidatePasswordActivity extends Activity {
                     finish();
                 } else {
                     Toast.makeText(ValidatePasswordActivity.this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
+                    editTextPassword.getText().clear();
                 }
             }
         });

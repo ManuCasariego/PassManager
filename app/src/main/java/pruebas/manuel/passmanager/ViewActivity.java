@@ -91,7 +91,6 @@ public class ViewActivity extends Activity {
         textViewUserName = (TextView) findViewById(R.id.textViewUserNameView);
         textViewPassword = (TextView) findViewById(R.id.textViewPasswordView);
 
-
         textViewService.setText(service);
         textViewUserName.setText(userName);
         textViewPassword.setText(password);
