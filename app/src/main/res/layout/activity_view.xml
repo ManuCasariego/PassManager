@@ -8,29 +8,29 @@
     android:padding="15dp"
     tools:context="pruebas.manuel.passmanager.ViewActivity">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:orientation="horizontal"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingBottom="10dp"
-        android:text="Usuario"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:orientation="horizontal">
 
-    <at.markushi.ui.CircleButton
-        android:id="@+id/buttonEditView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_action_edit"
-        app:cb_color="@color/ColorPrimary"
-        app:cb_pressedRingWidth="8dip" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingBottom="10dp"
+            android:text="Usuario"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
 
-</LinearLayout>
+        <at.markushi.ui.CircleButton
+            android:id="@+id/buttonEditView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_action_edit"
+            app:cb_color="@color/ColorPrimary"
+            app:cb_pressedRingWidth="8dip" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,15 +48,24 @@
             android:layout_width="15dp"
             android:layout_height="0dp" />
 
-        <TextView
-            android:id="@+id/textViewServiceView"
+
+        <HorizontalScrollView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="4"
-            android:maxLines="1"
-            android:text="Servicio"
-            android:textSize="20sp" />
+            android:layout_weight="1"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <TextView
+                android:id="@+id/textViewServiceView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                android:text="Servicio"
+                android:textSize="20sp" />
+        </HorizontalScrollView>
 
         <at.markushi.ui.CircleButton
             android:id="@+id/buttonURLView"
@@ -85,15 +94,25 @@
             android:layout_width="15dp"
             android:layout_height="0dp" />
 
-        <TextView
-            android:id="@+id/textViewUserNameView"
+        <HorizontalScrollView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="4"
-            android:maxLines="1"
-            android:text="Nombre de usuario"
-            android:textSize="20sp" />
+            android:layout_weight="1"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <TextView
+                android:id="@+id/textViewUserNameView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                android:text="Nombre de usuario"
+                android:textSize="20sp" />
+
+        </HorizontalScrollView>
+
 
         <at.markushi.ui.CircleButton
             android:id="@+id/buttonUserNameView"
@@ -122,15 +141,23 @@
             android:layout_width="15dp"
             android:layout_height="0dp" />
 
-        <TextView
-            android:id="@+id/textViewPasswordView"
+        <HorizontalScrollView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="4"
-            android:maxLines="1"
-            android:text="Contraseña"
-            android:textSize="20sp" />
+            android:layout_weight="1"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <TextView
+                android:id="@+id/textViewPasswordView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                android:text="Contraseña"
+                android:textSize="20sp" />
+        </HorizontalScrollView>
 
         <at.markushi.ui.CircleButton
 

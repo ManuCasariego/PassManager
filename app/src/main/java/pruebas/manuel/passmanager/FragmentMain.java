@@ -57,16 +57,20 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
         inicializarSharedPreferences();
+        return rootView;
+    }
+
+    private void cargarDatos() {
         inicializarBaseDeDatos();
         inicializarComponentes();
         aniadirFab();
-        return rootView;
     }
+
 
     private void inicializarSharedPreferences() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(rootView.getContext());
         masterPassword = sharedPreferences.getString(PREF_NAME, "");
-        if(masterPassword == ""){
+        if (masterPassword == "") {
             //Esto es que no tiene contraseña guardada
             //Dar la opcion de crear
             //Activity sin salida posible
@@ -76,8 +80,7 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
 
             Intent intent = new Intent(rootView.getContext(), SetPassWordActivity.class);
             startActivityForResult(intent, REQUEST_CODE_ADD_MASTERPASSWORD);
-        }
-        else{
+        } else {
             //Aquí tiene contraseña asi que abrir pantalla para validarla
             //Activity sin salida posible
             //Enviar contra para que compruebe antes de volver
@@ -94,7 +97,7 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
             @Override
             public void onClick(View v) {
                 // mis-clicking prevention, using threshold of 1000 ms
-                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
                     return;
                 }
                 mLastClickTime = SystemClock.elapsedRealtime();
@@ -114,8 +117,8 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
 
     private void actualizarArrayList() {
         usuarios.clear();
-        if(cursor.moveToFirst()){
-            do{
+        if (cursor.moveToFirst()) {
+            do {
                 usuarioActual = new Usuario();
                 usuarioActual.setId(cursor.getString(0));
                 usuarioActual.setService(cursor.getString(1));
@@ -123,7 +126,7 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
                 usuarioActual.setUserName(cursor.getString(3));
                 usuarioActual.setPassword(cursor.getString(4));
                 usuarios.add(usuarioActual);
-            } while(cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
     }
 
@@ -155,9 +158,8 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
                 db.insertar(service, url, userName, password);
                 actualizarListView();
             }
-        }
-        else if(requestCode == REQUEST_CODE_VIEW){
-            if(resultCode == Activity.RESULT_OK){
+        } else if (requestCode == REQUEST_CODE_VIEW) {
+            if (resultCode == Activity.RESULT_OK) {
                 Intent i = new Intent(rootView.getContext(), AddActivity.class);
 
                 i.putExtra(AddActivity.SERVICE, usuarioActual.getService());
@@ -167,9 +169,8 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
 
                 startActivityForResult(i, REQUEST_CODE_EDIT);
             }
-        }
-        else if(requestCode == REQUEST_CODE_EDIT){
-            if(resultCode == Activity.RESULT_OK){
+        } else if (requestCode == REQUEST_CODE_EDIT) {
+            if (resultCode == Activity.RESULT_OK) {
                 String id = usuarioActual.getId();
                 String service = data.getStringExtra(AddActivity.SERVICE);
                 String url = data.getStringExtra(AddActivity.URL);
@@ -178,27 +179,26 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
 
                 db.modificar(service, url, userName, password, id);
                 actualizarListView();
-            }
-            else if(resultCode == AddActivity.RESULT_DELETE){
+            } else if (resultCode == AddActivity.RESULT_DELETE) {
                 String id = usuarioActual.getId();
                 db.eliminar(id);
                 actualizarListView();
             }
-        }
-        else if(requestCode == REQUEST_CODE_ADD_MASTERPASSWORD){
-            if(resultCode == Activity.RESULT_OK){
+        } else if (requestCode == REQUEST_CODE_ADD_MASTERPASSWORD) {
+            if (resultCode == Activity.RESULT_OK) {
                 //aca habria que seguir con el oncreate ya que como cargue las contras por debajo cagada
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(rootView.getContext());
                 SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
                 prefsEditor.putString(PREF_NAME, data.getStringExtra(AddActivity.PASSWORD));
                 prefsEditor.commit();
+
+                cargarDatos();
                 //TODO: continuar con el oncreate, meterlo en un metodo para llamarlo desde aqui y desde el validateactivity
             }
-        }
-        else if (requestCode == REQUEST_CODE_VALIDATE_MASTERPASSWORD){
-
-                //aca recibimos asi que solo tenemos que llamar al metodo creado en el TODO de arriba
-
+        } else if (requestCode == REQUEST_CODE_VALIDATE_MASTERPASSWORD) {
+            if (resultCode == Activity.RESULT_OK) {
+                cargarDatos();
+            }
         }
     }
 
