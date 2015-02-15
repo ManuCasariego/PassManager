@@ -11,39 +11,34 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:baselineAligned="false"
         android:orientation="horizontal">
+
         <HorizontalScrollView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:paddingBottom="10dp"
             android:overScrollMode="never"
+            android:paddingBottom="10dp"
             android:scrollbars="none">
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/textViewUserNameMenuContextual"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Usuario"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
-                android:id="@+id/textViewUserNameMenuContextual"
+                android:text="@string/user"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
-            </HorizontalScrollView>
-
-
-
-
+        </HorizontalScrollView>
     </LinearLayout>
 
-
-
     <LinearLayout
+        android:id="@+id/estructuraUrl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/estructuraUrl"
         android:orientation="horizontal">
 
         <ImageView
@@ -56,7 +51,6 @@
             android:layout_width="15dp"
             android:layout_height="0dp" />
 
-
         <HorizontalScrollView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -66,11 +60,11 @@
             android:scrollbars="none">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
-                android:text="Abrir URL"
+                android:text="@string/openUrl"
                 android:textSize="20sp" />
         </HorizontalScrollView>
 
@@ -81,7 +75,6 @@
             android:src="@drawable/ic_action_url"
             app:cb_color="@color/ColorPrimary"
             app:cb_pressedRingWidth="8dip" />
-
 
     </LinearLayout>
 
@@ -109,15 +102,14 @@
             android:scrollbars="none">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
-                android:text="Copiar nombre"
+                android:text="@string/copyName"
                 android:textSize="20sp" />
 
         </HorizontalScrollView>
-
 
         <at.markushi.ui.CircleButton
             android:id="@+id/buttonCopyUserMenuContextual"
@@ -126,7 +118,6 @@
             android:src="@drawable/ic_action_name"
             app:cb_color="@color/ColorPrimary"
             app:cb_pressedRingWidth="8dip" />
-
 
     </LinearLayout>
 
@@ -154,11 +145,11 @@
             android:scrollbars="none">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
-                android:text="Copiar contraseña"
+                android:text="@string/copyPassword"
                 android:textSize="20sp" />
         </HorizontalScrollView>
 
@@ -188,7 +179,6 @@
             android:layout_width="15dp"
             android:layout_height="0dp" />
 
-
         <HorizontalScrollView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -198,11 +188,11 @@
             android:scrollbars="none">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
-                android:text="Editar usuario"
+                android:text="@string/editUser"
                 android:textSize="20sp" />
         </HorizontalScrollView>
 
@@ -213,8 +203,6 @@
             android:src="@drawable/ic_action_edit"
             app:cb_color="@color/ColorPrimary"
             app:cb_pressedRingWidth="8dip" />
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -232,7 +220,6 @@
             android:layout_width="15dp"
             android:layout_height="0dp" />
 
-
         <HorizontalScrollView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -242,11 +229,11 @@
             android:scrollbars="none">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
-                android:text="Borrar usuario"
+                android:text="@string/deleteUser"
                 android:textSize="20sp" />
         </HorizontalScrollView>
 
@@ -257,8 +244,6 @@
             android:src="@drawable/ic_action_delete"
             app:cb_color="@color/ColorPrimary"
             app:cb_pressedRingWidth="8dip" />
-
-
     </LinearLayout>
 
 </LinearLayout>

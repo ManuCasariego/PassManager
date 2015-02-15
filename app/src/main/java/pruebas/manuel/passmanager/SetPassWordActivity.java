@@ -49,10 +49,10 @@ public class SetPassWordActivity extends Activity {
                         setResult(RESULT_OK, intent);
                         finish();
                     } else {
-                        Toast.makeText(SetPassWordActivity.this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SetPassWordActivity.this, R.string.passwordsNotMatching, Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(SetPassWordActivity.this, "La contraseña debe tener mínimo 6 caracteres", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SetPassWordActivity.this, R.string.min6lenth, Toast.LENGTH_SHORT).show();
                 }
             }
         });

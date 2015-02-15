@@ -146,13 +146,13 @@ public class AddActivity extends Activity {
                 String password = editTextPassword.getText().toString();
 
                 if (service.equals("")) {
-                    Toast.makeText(AddActivity.this, "El servicio no puede ser nulo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddActivity.this, R.string.serviceNotNull, Toast.LENGTH_SHORT).show();
                     editTextService.requestFocus();
                 } else if (userName.equals("")) {
-                    Toast.makeText(AddActivity.this, "El usuario no puede ser nulo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddActivity.this, R.string.userNotNull, Toast.LENGTH_SHORT).show();
                     editTextUserName.requestFocus();
                 } else if (password.equals("")) {
-                    Toast.makeText(AddActivity.this, "La constraseña no puede ser nula", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddActivity.this, R.string.passwordNotNull, Toast.LENGTH_SHORT).show();
                     editTextPassword.requestFocus();
                 } else {
                     url = formalizarURL(url);
@@ -166,7 +166,6 @@ public class AddActivity extends Activity {
                 }
             }
         });
-
     }
 
     private String formalizarURL(String url) {

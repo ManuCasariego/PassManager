@@ -7,7 +7,6 @@
     android:paddingLeft="12dp"
     android:paddingRight="12dp">
 
-
     <ImageView
         android:layout_width="52dp"
         android:layout_height="52dp"
@@ -36,10 +35,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:text="@string/username"
+            android:text="@string/userName"
             android:textColor="@android:color/darker_gray"
             android:textSize="16sp" />
-
         </LinearLayout>
 
 

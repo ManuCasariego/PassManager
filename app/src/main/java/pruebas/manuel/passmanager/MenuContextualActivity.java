@@ -53,7 +53,7 @@ public class MenuContextualActivity extends Activity {
                 android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", userName);
                 clipboard.setPrimaryClip(clip);
-                Toast.makeText(MenuContextualActivity.this, "Usuario copiado al portapapeles", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MenuContextualActivity.this, R.string.userCopiedClipboard, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -63,7 +63,7 @@ public class MenuContextualActivity extends Activity {
                 android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", password);
                 clipboard.setPrimaryClip(clip);
-                Toast.makeText(MenuContextualActivity.this, "Contraseña copiada al portapapeles", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MenuContextualActivity.this, R.string.passwordCopiedClipboard, Toast.LENGTH_SHORT).show();
             }
         });
 

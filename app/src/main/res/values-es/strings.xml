@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PassManager Material</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="title_activity_add">AddActivity</string>
+    <string name="title_activity_view">ViewActivity</string>
+    <string name="title_activity_list_view">ListViewActivity</string>
+    <string name="service">Servicio</string>
+    <string name="title_activity_set_pass_word">SetPassWordActivity</string>
+    <string name="title_activity_validate_password">ValidatePasswordActivity</string>
+    <string name="title_activity_menu_contextual">MenuContextualActivity</string>
+    <string name="addUser">Añadir usuario</string>
+    <string name="urlOptional">URL (opcional)</string>
+    <string name="userName">Nombre de usuario</string>
+    <string name="cancel">CANCELAR</string>
+    <string name="save">GUARDAR</string>
+    <string name="user">Usuario</string>
+    <string name="openUrl">Abrir URL</string>
+    <string name="copyName">Copiar nombre</string>
+    <string name="copyPassword">Copiar contraseña</string>
+    <string name="editUser">Editar usuario</string>
+    <string name="deleteUser">Borrar usuario</string>
+    <string name="setUpPassword">Establecer contraseña</string>
+    <string name="confirm">Confirmar</string>
+    <string name="introducePassword">Introducir contraseña</string>
+    <string name="logIn">ACCEDER</string>
+    <string name="serviceNotNull">El servicio no puede ser nulo</string>
+    <string name="userNotNull">El usuario no puede ser nulo</string>
+    <string name="passwordNotNull">La contraseña no puede ser nula</string>
+    <string name="userCopiedClipboard">Usuario copiado al portapapeles</string>
+    <string name="passwordCopiedClipboard">Contraseña copiada al portapapeles</string>
+    <string name="passwordsNotMatching">Las contraseñas no coinciden</string>
+    <string name="min6lenth">La contraseña debe tener mínimo 6 caracteres</string>
+    <string name="wrongPassword">Contraseña incorrecta</string>
+</resources>

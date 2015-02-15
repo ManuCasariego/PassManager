@@ -36,8 +36,6 @@ public class ValidatePasswordActivity extends Activity {
     }
 
     private void aniadirListener() {
-        //validar que la contraseña sea igual a la que nos pasaron, finalizar
-
         buttonAcceder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +44,7 @@ public class ValidatePasswordActivity extends Activity {
                     setResult(RESULT_OK, intent);
                     finish();
                 } else {
-                    Toast.makeText(ValidatePasswordActivity.this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ValidatePasswordActivity.this, R.string.wrongPassword, Toast.LENGTH_SHORT).show();
                     editTextPassword.getText().clear();
                 }
             }
@@ -56,6 +54,7 @@ public class ValidatePasswordActivity extends Activity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.toString().equals(password)) {
@@ -66,6 +65,7 @@ public class ValidatePasswordActivity extends Activity {
                     passwordOk = false;
                 }
             }
+
             @Override
             public void afterTextChanged(Editable s) {
             }

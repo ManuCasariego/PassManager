@@ -19,7 +19,7 @@
             android:layout_weight="1"
             android:maxLines="1"
             android:paddingBottom="10dp"
-            android:text="Usuario"
+            android:text="@string/user"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
@@ -60,11 +60,11 @@
 
             <TextView
                 android:id="@+id/textViewServiceView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
-                android:text="Servicio"
+                android:text="@string/service"
                 android:textSize="20sp" />
         </HorizontalScrollView>
 
@@ -105,11 +105,11 @@
 
             <TextView
                 android:id="@+id/textViewUserNameView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
-                android:text="Nombre de usuario"
+                android:text="@string/userName"
                 android:textSize="20sp" />
 
         </HorizontalScrollView>
@@ -152,11 +152,11 @@
 
             <TextView
                 android:id="@+id/textViewPasswordView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
-                android:text="Contraseña"
+                android:text="@string/password"
                 android:textSize="20sp" />
         </HorizontalScrollView>
 

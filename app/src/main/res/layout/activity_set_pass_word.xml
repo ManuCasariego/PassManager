@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
-        android:text="Establecer contraseña"
+        android:text="@string/setUpPassword"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
 
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="4"
-            android:hint="Contraseña"
+            android:hint="@string/password"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:maxLines="1" />
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="4"
-            android:hint="Confirmar"
+            android:hint="@string/confirm"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:maxLines="1" />
@@ -74,13 +74,13 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/buttonGuardarSet"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:paddingTop="15dp"
-        android:text="GUARDAR"
-        android:id="@+id/buttonGuardarSet"
+        android:text="@string/save"
         android:textColor="@color/ColorPrimary" />
 
 </LinearLayout>

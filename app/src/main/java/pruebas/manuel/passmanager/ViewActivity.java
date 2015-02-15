@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import at.markushi.ui.CircleButton;
 
-
 public class ViewActivity extends Activity {
 
     private TextView textViewService;
@@ -64,7 +63,7 @@ public class ViewActivity extends Activity {
                 android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", userName);
                 clipboard.setPrimaryClip(clip);
-                Toast.makeText(ViewActivity.this, "Usuario copiado al portapapeles", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewActivity.this, R.string.userCopiedClipboard, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -74,7 +73,7 @@ public class ViewActivity extends Activity {
                 android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", password);
                 clipboard.setPrimaryClip(clip);
-                Toast.makeText(ViewActivity.this, "Contraseña copiada al portapapeles", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewActivity.this, R.string.passwordCopiedClipboard, Toast.LENGTH_SHORT).show();
             }
         });
     }
