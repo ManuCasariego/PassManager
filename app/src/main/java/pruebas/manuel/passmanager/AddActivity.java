@@ -52,7 +52,6 @@ public class AddActivity extends Activity {
         String userName = intent.getStringExtra(AddActivity.USERNAME);
         String password = intent.getStringExtra(AddActivity.PASSWORD);
 
-
         btnGuardar = (Button) findViewById(R.id.btnGuardarAdd);
         btnCancelar = (Button) findViewById(R.id.btnCancelarAdd);
 
@@ -186,6 +185,8 @@ public class AddActivity extends Activity {
         setResult(RESULT_CANCELED, returnIntent);
         finish();
     }
+
+
 
 
 }

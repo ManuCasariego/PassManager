@@ -8,4 +8,6 @@
     <string name="title_activity_view">ViewActivity</string>
     <string name="title_activity_list_view">ListViewActivity</string>
     <string name="service">Servicio</string>
+    <string name="title_activity_set_pass_word">SetPassWordActivity</string>
+    <string name="title_activity_validate_password">ValidatePasswordActivity</string>
 </resources>

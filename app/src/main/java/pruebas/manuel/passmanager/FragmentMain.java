@@ -3,9 +3,11 @@ package pruebas.manuel.passmanager;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +32,9 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
     private static final int REQUEST_CODE_ADD = 123;
     private static final int REQUEST_CODE_VIEW = 124;
     private static final int REQUEST_CODE_EDIT = 125;
+    private static final int REQUEST_CODE_ADD_MASTERPASSWORD = 126;
+    private static final int REQUEST_CODE_VALIDATE_MASTERPASSWORD = 127;
+    private static final String PREF_NAME = "masterPassword";
 
     private View rootView;
     private DataBaseManager db;
@@ -43,16 +48,44 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
     private ArrayList<Usuario> usuarios = new ArrayList<>();
     private Usuario usuarioActual;
 
+    private String masterPassword;
     private long mLastClickTime = 0;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        inicializarSharedPreferences();
         inicializarBaseDeDatos();
         inicializarComponentes();
         aniadirFab();
         return rootView;
+    }
+
+    private void inicializarSharedPreferences() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(rootView.getContext());
+        masterPassword = sharedPreferences.getString(PREF_NAME, "");
+        if(masterPassword == ""){
+            //Esto es que no tiene contraseña guardada
+            //Dar la opcion de crear
+            //Activity sin salida posible
+            //Recibir contra y guardarla
+            //activityforresult
+
+
+            Intent intent = new Intent(rootView.getContext(), SetPassWordActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_ADD_MASTERPASSWORD);
+        }
+        else{
+            //Aquí tiene contraseña asi que abrir pantalla para validarla
+            //Activity sin salida posible
+            //Enviar contra para que compruebe antes de volver
+            Intent intent = new Intent(rootView.getContext(), ValidatePasswordActivity.class);
+            intent.putExtra(AddActivity.PASSWORD, masterPassword);
+            startActivityForResult(intent, REQUEST_CODE_VALIDATE_MASTERPASSWORD);
+        }
+
     }
 
     private void aniadirFab() {
@@ -152,6 +185,21 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
                 actualizarListView();
             }
         }
+        else if(requestCode == REQUEST_CODE_ADD_MASTERPASSWORD){
+            if(resultCode == Activity.RESULT_OK){
+                //aca habria que seguir con el oncreate ya que como cargue las contras por debajo cagada
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(rootView.getContext());
+                SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
+                prefsEditor.putString(PREF_NAME, data.getStringExtra(AddActivity.PASSWORD));
+                prefsEditor.commit();
+                //TODO: continuar con el oncreate, meterlo en un metodo para llamarlo desde aqui y desde el validateactivity
+            }
+        }
+        else if (requestCode == REQUEST_CODE_VALIDATE_MASTERPASSWORD){
+
+                //aca recibimos asi que solo tenemos que llamar al metodo creado en el TODO de arriba
+
+        }
     }
 
     @Override
@@ -170,4 +218,6 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
 
         startActivityForResult(intent, REQUEST_CODE_VIEW);
     }
+
+
 }

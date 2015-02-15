@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="500dp"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context="pruebas.manuel.passmanager.SetPassWordActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:text="Establecer contraseña"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageViewContraSet"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_action_password" />
+
+        <TextView
+            android:layout_width="15dp"
+            android:layout_height="0dp" />
+
+        <EditText
+            android:id="@+id/editTextPasswordSet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="4"
+            android:hint="Contraseña"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLines="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageViewContraSet2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_action_password" />
+
+        <TextView
+            android:layout_width="15dp"
+            android:layout_height="0dp" />
+
+        <EditText
+            android:id="@+id/editTextPasswordSet2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="4"
+            android:hint="Contraseña"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLines="1" />
+
+    </LinearLayout>
+
+    <Button
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:paddingTop="15dp"
+        android:text="GUARDAR"
+        android:id="@+id/buttonGuardarSet"
+        android:textColor="@color/ColorPrimary" />
+
+</LinearLayout>
