@@ -41,12 +41,11 @@ public class ValidatePasswordActivity extends Activity {
         buttonAcceder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(passwordOk){
+                if (passwordOk) {
                     Intent intent = new Intent();
                     setResult(RESULT_OK, intent);
                     finish();
-                }
-                else{
+                } else {
                     Toast.makeText(ValidatePasswordActivity.this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -55,9 +54,7 @@ public class ValidatePasswordActivity extends Activity {
         editTextPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.toString().equals(password)) {
@@ -68,10 +65,8 @@ public class ValidatePasswordActivity extends Activity {
                     passwordOk = false;
                 }
             }
-
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
     }

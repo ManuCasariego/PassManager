@@ -101,7 +101,7 @@ public class ViewActivity extends Activity {
         btnUserName = (CircleButton) findViewById(R.id.buttonUserNameView);
         btnPassword = (CircleButton) findViewById(R.id.buttonPasswordView);
 
-        if(url.equals("")){
+        if (url.equals("")) {
             btnURL.setVisibility(View.INVISIBLE);
         }
     }

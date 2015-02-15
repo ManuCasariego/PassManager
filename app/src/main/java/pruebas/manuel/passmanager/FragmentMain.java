@@ -13,8 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.melnykov.fab.FloatingActionButton;
@@ -22,6 +22,7 @@ import com.melnykov.fab.FloatingActionButton;
 import java.util.ArrayList;
 
 import pruebas.manuel.passmanager.util.DataBaseManager;
+import pruebas.manuel.passmanager.util.UsersListAdapter;
 import pruebas.manuel.passmanager.util.Usuario;
 
 public class FragmentMain extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
@@ -39,10 +40,7 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
     private DataBaseManager db;
     private Cursor cursor;
     private ListView listView;
-    private SimpleCursorAdapter cursorAdapter;
     private FloatingActionButton fab;
-    private String[] from;
-    private int[] to;
 
     private ArrayList<Usuario> usuarios = new ArrayList<>();
     private Usuario usuarioActual;
@@ -50,11 +48,13 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
     private String masterPassword;
     private long mLastClickTime = 0;
 
+    private ArrayAdapter<Usuario> adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        adapter = new UsersListAdapter(getActivity(), new ArrayList<Usuario>());
         inicializarSharedPreferences();
         return rootView;
     }
@@ -64,7 +64,6 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
         inicializarComponentes();
         aniadirFab();
     }
-
 
     private void inicializarSharedPreferences() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(rootView.getContext());
@@ -85,12 +84,10 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // mis-clicking prevention, using threshold of 1000 ms
                 if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
                     return;
                 }
                 mLastClickTime = SystemClock.elapsedRealtime();
-
                 Intent i = new Intent(rootView.getContext(), AddActivity.class);
                 startActivityForResult(i, REQUEST_CODE_ADD);
             }
@@ -106,6 +103,7 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
 
     private void actualizarArrayList() {
         usuarios.clear();
+        adapter.clear();
         if (cursor.moveToFirst()) {
             do {
                 usuarioActual = new Usuario();
@@ -115,25 +113,21 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
                 usuarioActual.setUserName(cursor.getString(3));
                 usuarioActual.setPassword(cursor.getString(4));
                 usuarios.add(usuarioActual);
+                adapter.add(usuarioActual);
             } while (cursor.moveToNext());
         }
     }
 
     private void inicializarComponentes() {
         listView = (ListView) rootView.findViewById(R.id.listView);
-        from = new String[]{DataBaseManager.CN_SERVICE, DataBaseManager.CN_NAME};
-        to = new int[]{R.id.textViewServicio, R.id.textViewNombreUsuario};
-        cursorAdapter = new SimpleCursorAdapter(rootView.getContext(), R.layout.list_item_personalizado, cursor, from, to, 0);
-        listView.setAdapter(cursorAdapter);
+        adapter.setNotifyOnChange(true);
+        listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
         listView.setOnItemLongClickListener(this);
-
     }
 
     private void actualizarListView() {
         inicializarBaseDeDatos();
-        cursorAdapter = new SimpleCursorAdapter(rootView.getContext(), R.layout.list_item_personalizado, cursor, from, to, 0);
-        listView.setAdapter(cursorAdapter);
     }
 
     @Override
@@ -185,13 +179,10 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
             if (resultCode == Activity.RESULT_OK) {
                 cargarDatos();
             }
-        }
-
-        else if( requestCode == REQUEST_CODE_MENU_CONTEXTUAL){
-            if(resultCode == MenuContextualActivity.RESULT_DELETE){
+        } else if (requestCode == REQUEST_CODE_MENU_CONTEXTUAL) {
+            if (resultCode == MenuContextualActivity.RESULT_DELETE) {
                 borrarUsuario(usuarioActual);
-            }
-            else if(resultCode== MenuContextualActivity.RESULT_EDIT){
+            } else if (resultCode == MenuContextualActivity.RESULT_EDIT) {
                 Intent i = new Intent(rootView.getContext(), AddActivity.class);
 
                 i.putExtra(AddActivity.SERVICE, usuarioActual.getService());
@@ -224,7 +215,6 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         usuarioActual = usuarios.get(position);
-
         Intent intent = new Intent(rootView.getContext(), MenuContextualActivity.class);
 
         intent.putExtra(AddActivity.SERVICE, usuarioActual.getService());
@@ -233,14 +223,12 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
         intent.putExtra(AddActivity.PASSWORD, usuarioActual.getPassword());
 
         startActivityForResult(intent, REQUEST_CODE_MENU_CONTEXTUAL);
-
         return true;
     }
 
-    public void borrarUsuario(Usuario usuario){
+    public void borrarUsuario(Usuario usuario) {
         String id = usuario.getId();
         db.eliminar(id);
         actualizarListView();
     }
-
 }

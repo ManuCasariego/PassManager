@@ -71,7 +71,7 @@ public class SetPassWordActivity extends Activity {
                 if (texto1.length() >= 6) {
                     imageViewPassword1.setImageResource(R.mipmap.ic_action_password_orange);
                     firstPassOk = true;
-                    if(texto1.equals(texto2)){
+                    if (texto1.equals(texto2)) {
                         imageViewPassword2.setImageResource(R.mipmap.ic_action_password_orange);
                         secondPassOk = true;
                     }
@@ -124,7 +124,6 @@ public class SetPassWordActivity extends Activity {
 
         buttonGuardar = (Button) findViewById(R.id.buttonGuardarSet);
     }
-
 
     @Override
     public void onBackPressed() {

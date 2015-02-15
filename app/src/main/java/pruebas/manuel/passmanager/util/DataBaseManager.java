@@ -55,6 +55,6 @@ public class DataBaseManager {
 
     public Cursor cargarCursorContactos() {
         String[] columnas = new String[]{CN_ID, CN_SERVICE, CN_URL, CN_NAME, CN_PASSWORD};
-        return db.query(TABLE_NAME, columnas, null, null, null, null, CN_SERVICE + "," + CN_NAME + " ASC");
+        return db.query(TABLE_NAME, columnas, null, null, null, null, "LOWER(" + CN_SERVICE + "),LOWER(" + CN_NAME + ")");
     }
 }
