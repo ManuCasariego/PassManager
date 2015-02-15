@@ -24,16 +24,15 @@ import java.util.ArrayList;
 import pruebas.manuel.passmanager.util.DataBaseManager;
 import pruebas.manuel.passmanager.util.Usuario;
 
-/**
- * Created by Manuel on 12/02/2015.
- */
-public class FragmentMain extends Fragment implements AdapterView.OnItemClickListener {
+public class FragmentMain extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     private static final int REQUEST_CODE_ADD = 123;
     private static final int REQUEST_CODE_VIEW = 124;
     private static final int REQUEST_CODE_EDIT = 125;
     private static final int REQUEST_CODE_ADD_MASTERPASSWORD = 126;
     private static final int REQUEST_CODE_VALIDATE_MASTERPASSWORD = 127;
+    private static final int REQUEST_CODE_MENU_CONTEXTUAL = 128;
+
     private static final String PREF_NAME = "masterPassword";
 
     private View rootView;
@@ -70,20 +69,10 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
     private void inicializarSharedPreferences() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(rootView.getContext());
         masterPassword = sharedPreferences.getString(PREF_NAME, "");
-        if (masterPassword == "") {
-            //Esto es que no tiene contraseña guardada
-            //Dar la opcion de crear
-            //Activity sin salida posible
-            //Recibir contra y guardarla
-            //activityforresult
-
-
+        if (masterPassword.equals("")) {
             Intent intent = new Intent(rootView.getContext(), SetPassWordActivity.class);
             startActivityForResult(intent, REQUEST_CODE_ADD_MASTERPASSWORD);
         } else {
-            //Aquí tiene contraseña asi que abrir pantalla para validarla
-            //Activity sin salida posible
-            //Enviar contra para que compruebe antes de volver
             Intent intent = new Intent(rootView.getContext(), ValidatePasswordActivity.class);
             intent.putExtra(AddActivity.PASSWORD, masterPassword);
             startActivityForResult(intent, REQUEST_CODE_VALIDATE_MASTERPASSWORD);
@@ -137,6 +126,7 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
         cursorAdapter = new SimpleCursorAdapter(rootView.getContext(), R.layout.list_item_personalizado, cursor, from, to, 0);
         listView.setAdapter(cursorAdapter);
         listView.setOnItemClickListener(this);
+        listView.setOnItemLongClickListener(this);
 
     }
 
@@ -180,9 +170,7 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
                 db.modificar(service, url, userName, password, id);
                 actualizarListView();
             } else if (resultCode == AddActivity.RESULT_DELETE) {
-                String id = usuarioActual.getId();
-                db.eliminar(id);
-                actualizarListView();
+                borrarUsuario(usuarioActual);
             }
         } else if (requestCode == REQUEST_CODE_ADD_MASTERPASSWORD) {
             if (resultCode == Activity.RESULT_OK) {
@@ -191,13 +179,27 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
                 SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
                 prefsEditor.putString(PREF_NAME, data.getStringExtra(AddActivity.PASSWORD));
                 prefsEditor.commit();
-
                 cargarDatos();
-                //TODO: continuar con el oncreate, meterlo en un metodo para llamarlo desde aqui y desde el validateactivity
             }
         } else if (requestCode == REQUEST_CODE_VALIDATE_MASTERPASSWORD) {
             if (resultCode == Activity.RESULT_OK) {
                 cargarDatos();
+            }
+        }
+
+        else if( requestCode == REQUEST_CODE_MENU_CONTEXTUAL){
+            if(resultCode == MenuContextualActivity.RESULT_DELETE){
+                borrarUsuario(usuarioActual);
+            }
+            else if(resultCode== MenuContextualActivity.RESULT_EDIT){
+                Intent i = new Intent(rootView.getContext(), AddActivity.class);
+
+                i.putExtra(AddActivity.SERVICE, usuarioActual.getService());
+                i.putExtra(AddActivity.URL, usuarioActual.getURL());
+                i.putExtra(AddActivity.USERNAME, usuarioActual.getUserName());
+                i.putExtra(AddActivity.PASSWORD, usuarioActual.getPassword());
+
+                startActivityForResult(i, REQUEST_CODE_EDIT);
             }
         }
     }
@@ -219,5 +221,26 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
         startActivityForResult(intent, REQUEST_CODE_VIEW);
     }
 
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        usuarioActual = usuarios.get(position);
+
+        Intent intent = new Intent(rootView.getContext(), MenuContextualActivity.class);
+
+        intent.putExtra(AddActivity.SERVICE, usuarioActual.getService());
+        intent.putExtra(AddActivity.URL, usuarioActual.getURL());
+        intent.putExtra(AddActivity.USERNAME, usuarioActual.getUserName());
+        intent.putExtra(AddActivity.PASSWORD, usuarioActual.getPassword());
+
+        startActivityForResult(intent, REQUEST_CODE_MENU_CONTEXTUAL);
+
+        return true;
+    }
+
+    public void borrarUsuario(Usuario usuario){
+        String id = usuario.getId();
+        db.eliminar(id);
+        actualizarListView();
+    }
 
 }

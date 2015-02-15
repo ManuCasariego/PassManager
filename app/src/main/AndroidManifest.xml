@@ -29,11 +29,16 @@
         <activity
             android:name=".SetPassWordActivity"
             android:label="@string/title_activity_set_pass_word"
-            android:theme="@style/DialogTheme">
+            android:theme="@style/DialogTheme" >
         </activity>
         <activity
             android:name=".ValidatePasswordActivity"
             android:label="@string/title_activity_validate_password"
+            android:theme="@style/DialogTheme" >
+        </activity>
+        <activity
+            android:name=".MenuContextualActivity"
+            android:label="@string/title_activity_menu_contextual"
             android:theme="@style/DialogTheme">
         </activity>
     </application>

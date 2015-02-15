@@ -10,4 +10,5 @@
     <string name="service">Servicio</string>
     <string name="title_activity_set_pass_word">SetPassWordActivity</string>
     <string name="title_activity_validate_password">ValidatePasswordActivity</string>
+    <string name="title_activity_menu_contextual">MenuContextualActivity</string>
 </resources>
