@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PassManager Material</string>
+    <string name="app_name">PassManager</string>
     <string name="action_settings">Settings</string>
     <string name="addUser">Add user</string>
     <string name="cancel">CANCEL</string>
@@ -9,7 +9,6 @@
     <string name="copyPassword">Copy password</string>
     <string name="deleteUser">Delete user</string>
     <string name="editUser">Edit user</string>
-    <string name="hello_world">Hello world!</string>
     <string name="introducePassword">Introduce password</string>
     <string name="logIn">Log in</string>
     <string name="min6lenth">The password must be at least 8 characters</string>

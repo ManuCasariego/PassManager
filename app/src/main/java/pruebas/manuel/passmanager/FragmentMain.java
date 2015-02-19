@@ -50,6 +50,12 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
 
     private ArrayAdapter<Usuario> adapter;
 
+    private long tiempo = 1;
+
+    private boolean pantallaLogueo = false;
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,11 +78,8 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
             Intent intent = new Intent(rootView.getContext(), SetPassWordActivity.class);
             startActivityForResult(intent, REQUEST_CODE_ADD_MASTERPASSWORD);
         } else {
-            Intent intent = new Intent(rootView.getContext(), ValidatePasswordActivity.class);
-            intent.putExtra(AddActivity.PASSWORD, masterPassword);
-            startActivityForResult(intent, REQUEST_CODE_VALIDATE_MASTERPASSWORD);
+            llamarAAutenticar();
         }
-
     }
 
     private void aniadirFab() {
@@ -126,6 +129,30 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
         listView.setOnItemLongClickListener(this);
     }
 
+    @Override
+    public void onStop() {
+        tiempo = SystemClock.elapsedRealtime();
+        super.onStop();
+    }
+
+    @Override
+    public void onStart() {
+        if (SystemClock.elapsedRealtime() - tiempo > 60000 && tiempo != 1) {
+            adapter.clear();
+            llamarAAutenticar();
+        }
+        super.onStart();
+    }
+
+    public void llamarAAutenticar(){
+        if(!pantallaLogueo){
+            pantallaLogueo = true;
+            Intent intent = new Intent(rootView.getContext(), ValidatePasswordActivity.class);
+            intent.putExtra(AddActivity.PASSWORD, masterPassword);
+            startActivityForResult(intent, REQUEST_CODE_VALIDATE_MASTERPASSWORD);
+        }
+    }
+
     private void actualizarListView() {
         inicializarBaseDeDatos();
     }
@@ -168,7 +195,6 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
             }
         } else if (requestCode == REQUEST_CODE_ADD_MASTERPASSWORD) {
             if (resultCode == Activity.RESULT_OK) {
-                //aca habria que seguir con el oncreate ya que como cargue las contras por debajo cagada
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(rootView.getContext());
                 SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
                 prefsEditor.putString(PREF_NAME, data.getStringExtra(AddActivity.PASSWORD));
@@ -178,6 +204,7 @@ public class FragmentMain extends Fragment implements AdapterView.OnItemClickLis
         } else if (requestCode == REQUEST_CODE_VALIDATE_MASTERPASSWORD) {
             if (resultCode == Activity.RESULT_OK) {
                 cargarDatos();
+                pantallaLogueo=false;
             }
         } else if (requestCode == REQUEST_CODE_MENU_CONTEXTUAL) {
             if (resultCode == MenuContextualActivity.RESULT_DELETE) {
